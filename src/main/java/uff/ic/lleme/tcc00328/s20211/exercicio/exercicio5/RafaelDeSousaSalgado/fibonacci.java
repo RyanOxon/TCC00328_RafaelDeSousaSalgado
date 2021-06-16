@@ -28,5 +28,6 @@ public class fibonacci {
                     break;
             }
         }while(n<qnt);
+        scan.close();
     }
 }
