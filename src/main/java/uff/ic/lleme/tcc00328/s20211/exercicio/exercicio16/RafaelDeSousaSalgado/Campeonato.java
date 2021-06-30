@@ -1,22 +1,34 @@
 package uff.ic.lleme.tcc00328.s20211.exercicio.exercicio16.RafaelDeSousaSalgado;
 
 public class Campeonato {
-    public static void main(String[] args){ // Valores do exemplo( 5 times ):
+    public static void main(String[] args){ 
        int[][] matriz = {
-                        {10, 8, 3, -4, 12},
-                        {17, 8, 5, 10, 19},
-                        {10, 8, 3, -5, 11},
-                        {11, 8, 3, -1, 15},
-                        {19, 8, 6, 13, 23}};    
+                        {10, 8, 3, 1, 24},
+                        {10, 8, 3, 1, 19},
+                        {10, 8, 3, 1, 11},
+                        {10, 8, 3, 1, 15},
+                        {10, 8, 3, 1, 23}};    
        
        int vTime = decideVencedor(matriz.length, matriz);
-       System.out.println("O time "+vTime+" Ganhou o campeonato!!");
-       
+       System.out.println("O time "+vTime+" Ganhou o campeonato!!"); 
     }
 
-
-    private static int decideVencedor(int par, int[][] matriz) {
-        int vTime = 0;
-        return vTime;
+    private static int decideVencedor(int qnt, int[][] matriz){
+        int indexVencedor = -1;
+        for(int i=0;i<(qnt);i++){
+            if(indexVencedor == -1)
+                indexVencedor = i;
+            else{
+                for(int j=0;j<(matriz[i].length);j++){
+                    if(matriz[indexVencedor][j] > matriz[i][j])
+                        break;
+                    if(matriz[indexVencedor][j] < matriz[i][j]){
+                        indexVencedor = i;
+                        break;
+                    }    
+                }
+            }
+        }        
+        return indexVencedor;
     }
 }
