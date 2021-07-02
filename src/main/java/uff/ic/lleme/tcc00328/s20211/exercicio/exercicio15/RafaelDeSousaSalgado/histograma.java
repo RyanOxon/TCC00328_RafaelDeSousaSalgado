@@ -1,4 +1,4 @@
-package uff.ic.lleme.tcc00328.s20211.exercicio.exercico15.RafaelDeSousaSalgado;
+package uff.ic.lleme.tcc00328.s20211.exercicio.exercicio15.RafaelDeSousaSalgado;
 
 public class histograma {
     public static void main(String[] args){
