@@ -17,7 +17,11 @@ public class SistemaAcademico {
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar alunos, Arquivo nao encontrado");
         }
-        String[] disciplinas = carregarDisciplinas(arqDisciplinas);
+        try {
+            ArrayList<Disciplina> alunos = carregarDisciplinas(arqDisciplinas);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro ao carregar Disciplinas, Arquivo nao encontrado");
+        }
         String[] inscricoes = carregarInscricoes(arqInscricoes);
     }
     
@@ -43,8 +47,26 @@ public class SistemaAcademico {
         return al;
     }
     
-    private static String[] carregarDisciplinas(String nomeArquivo){
-        #todo
+    private static ArrayList<Disciplina> carregarDisciplinas(String nomeArquivo) throws FileNotFoundException{
+        InputStream input = new FileInputStream(nomeArquivo);
+        Scanner in = new Scanner(input);
+        String leitura;
+        String[] dados = new String[3];
+        ArrayList<Disciplina> dis = new ArrayList<>();
+        int pos = 0;
+        while(in.hasNext()){
+            leitura = in.next();
+            while(!leitura.equals("\n")){
+                if(pos>2){
+                    dados[pos] = dados[pos].concat(leitura); 
+                }
+                dados[pos] = leitura;
+                pos++;    
+            }
+            dis.add(new Disciplina(dados[0], dados[1], dados[2]));
+            pos = 0;
+        }
+        return dis;
     }
 
     private static String[] carregarInscricoes(String nomeArquivo) {
