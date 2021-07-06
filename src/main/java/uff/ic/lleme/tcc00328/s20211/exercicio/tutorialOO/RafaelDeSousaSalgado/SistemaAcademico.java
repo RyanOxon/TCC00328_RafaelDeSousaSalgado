@@ -18,7 +18,7 @@ public class SistemaAcademico {
             System.out.println("Erro ao carregar alunos, Arquivo nao encontrado");
         }
         try {
-            ArrayList<Disciplina> alunos = carregarDisciplinas(arqDisciplinas);
+            ArrayList<Disciplina> disciplinas = carregarDisciplinas(arqDisciplinas);
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar Disciplinas, Arquivo nao encontrado");
         }
