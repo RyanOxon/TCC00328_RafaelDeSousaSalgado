@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SistemaAcademico {
@@ -19,94 +18,81 @@ public class SistemaAcademico {
         
         try {
             alunos = carregarAlunos(arqAluno);
+            System.out.println("Alunos Carregados");
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar alunos, Arquivo nao encontrado");
-        } catch ( NoSuchElementException ex) {
-            System.out.println("Erro no arquivo de alunos, mal formatado");
         }
         try {
             disciplinas = carregarDisciplinas(arqDisciplinas);
+            System.out.println("Disciplinas Carregadas");
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar Disciplinas, Arquivo nao encontrado");
-        } catch ( NoSuchElementException ex) {
-            System.out.println("Erro no arquivo de disciplinas, mal formatado");
         }
         try {
             inscricoes = carregarInscricoes(arqInscricoes);
+            System.out.println("Inscricoes Carregadas");
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar as Inscricoes, Arquivo nao encontrado");
-        } catch ( NoSuchElementException ex) {
-            System.out.println("Erro no arquivo de disciplinas, mal formatado");
         }
             
     }
     
-    private static ArrayList<Aluno> carregarAlunos(String nomeArquivo) throws FileNotFoundException, NoSuchElementException {
+    private static ArrayList<Aluno> carregarAlunos(String nomeArquivo) throws FileNotFoundException{
         InputStream input = new FileInputStream(nomeArquivo);
-        Scanner in = new Scanner(input);
-        String leitura;
-        String[] dados = new String[4];
+        Scanner in = new Scanner(input); 
+        String nome = " ", matricula = " ", departamento= " ", cpf = " " ;
+        String[] dados; //[0] CPF [1] Matricula [2] Departamento [3+] Nome
         ArrayList<Aluno> al = new ArrayList<>();
-        int pos = 0;
         while(in.hasNext()){
-            leitura = in.next();
-            while(!leitura.equals("\n") || in.hasNext()){
-                if(pos>3)
-                    dados[pos-1] = dados[pos-1].concat(leitura); 
-                else{
-                    dados[pos] = leitura;
-                    pos++;
+            dados = in.nextLine().split(" ");
+            for(int i = 0; i<dados.length;i++){
+                switch (i) {
+                    case 0 -> cpf = dados[i];
+                    case 1 -> matricula = dados[i];
+                    case 2 -> departamento = dados[i];
+                    case 3 -> nome = dados[i];
+                    default -> {
+                        nome = nome.concat(" ");
+                        nome = nome.concat(dados[i]);
+                    }
                 }
-                if(in.hasNext())
-                    leitura = in.next();
             }
-            al.add(new Aluno(dados[0], dados[1], dados[2], dados[3]));
-            pos = 0;
+            al.add(new Aluno(cpf, matricula, departamento, nome));
         }
         return al;
     }
     
-    private static ArrayList<Disciplina> carregarDisciplinas(String nomeArquivo) throws FileNotFoundException, NoSuchElementException{
+    private static ArrayList<Disciplina> carregarDisciplinas(String nomeArquivo) throws FileNotFoundException{
         InputStream input = new FileInputStream(nomeArquivo);
         Scanner in = new Scanner(input);
-        String leitura;
-        String[] dados = new String[3];
+        String codigo = " " , sigla= " ", nome = " ";
+        String[] dados;
         ArrayList<Disciplina> dis = new ArrayList<>();
-        int pos = 0;
         while(in.hasNext()){
-            leitura = in.next();
-            while(!leitura.equals("\n")|| in.hasNext()){
-                if(pos>2)
-                    dados[pos] = dados[pos].concat(leitura);
-                else{
-                    dados[pos] = leitura;
-                    pos++;
+            dados = in.nextLine().split(" ");
+            for(int i = 0;i<dados.length;i++){
+                switch (i) {
+                    case 0 -> codigo = dados[i];
+                    case 1 -> sigla = dados[i];
+                    case 2 -> nome = dados[i];
+                    default -> {
+                        nome = nome.concat(" ");
+                        nome = nome.concat(dados[i]);
+                    }
                 }
-                if(in.hasNext()) 
-                    leitura = in.next();
             }
-            dis.add(new Disciplina(dados[0], dados[1], dados[2]));
-            pos = 0;
+            dis.add(new Disciplina(codigo, sigla, nome));
         }
         return dis;
     }
 
-    private static ArrayList<Inscricao> carregarInscricoes(String nomeArquivo) throws FileNotFoundException, NoSuchElementException  {
+    private static ArrayList<Inscricao> carregarInscricoes(String nomeArquivo) throws FileNotFoundException{
         InputStream input = new FileInputStream(nomeArquivo);
         Scanner in = new Scanner(input);
-        String leitura;
-        String[] dados = new String[3];
-        int pos = 0;
+        String[] dados;
         ArrayList<Inscricao> ins = new ArrayList<>();
         while(in.hasNext()){
-            leitura = in.next();
-            while(!leitura.equals("\n")|| in.hasNext()){
-                dados[pos] = leitura; //[0] Disciplina :: [1] Matricula :: [2] Data 
-                pos++;
-                if(in.hasNext()) 
-                    leitura = in.next();
-            }
-            pos = 0;
+            dados = in.nextLine().split(" ");
             for(Disciplina disc : disciplinas ){
                 if(disc.getCod().equals(dados[0]))
                     for(Aluno al : alunos)
