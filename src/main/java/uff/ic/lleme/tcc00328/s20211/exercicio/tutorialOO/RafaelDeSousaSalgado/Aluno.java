@@ -18,5 +18,9 @@ public class Aluno extends Pessoa {
     private void setUnidade(String sigla) {
         this.unidade = sigla;
     }
+
+    public String getMat(){
+        return this.matricula;
+    }
     
 }

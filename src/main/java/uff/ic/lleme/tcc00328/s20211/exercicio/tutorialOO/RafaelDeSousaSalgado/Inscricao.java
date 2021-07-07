@@ -1,6 +1,6 @@
 package uff.ic.lleme.tcc00328.s20211.exercicio.tutorialOO.RafaelDeSousaSalgado;
 
-class Inscricao {
+public class Inscricao {
     private Aluno aluno;
     private String data_matricula;
     private String data_cancelamento;

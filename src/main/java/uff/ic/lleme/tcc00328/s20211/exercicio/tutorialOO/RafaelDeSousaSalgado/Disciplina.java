@@ -1,6 +1,6 @@
 package uff.ic.lleme.tcc00328.s20211.exercicio.tutorialOO.RafaelDeSousaSalgado;
 
-class Disciplina {
+public class Disciplina {
     private String codigo;
     private String nome;
     private String sigla;
@@ -21,5 +21,9 @@ class Disciplina {
         
     private void setNome(String nome){
         this.nome = nome;
-    }    
+    }
+
+    public String getCod(){
+        return this.codigo;
+    }
 }
