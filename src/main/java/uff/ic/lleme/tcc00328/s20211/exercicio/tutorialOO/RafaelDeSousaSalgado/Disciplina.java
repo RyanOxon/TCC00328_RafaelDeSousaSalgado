@@ -26,4 +26,8 @@ public class Disciplina {
     public String getCod(){
         return this.codigo;
     }
+
+    public String getNome() {
+        return this.nome;
+    }
 }

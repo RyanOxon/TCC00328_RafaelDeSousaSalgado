@@ -34,7 +34,8 @@ public class SistemaAcademico {
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar as Inscricoes, Arquivo nao encontrado");
         }
-            
+        
+        informarNotasDeAlunos();
     }
     
     private static ArrayList<Aluno> carregarAlunos(String nomeArquivo) throws FileNotFoundException{
@@ -96,10 +97,45 @@ public class SistemaAcademico {
             for(Disciplina disc : disciplinas ){
                 if(disc.getCod().equals(dados[0]))
                     for(Aluno al : alunos)
-                        if(al.getMat().equals(dados[1]))
-                            ins.add(new Inscricao(al, disc, dados[2])); 
+                        if(al.getMat().equals(dados[1])){
+                            Inscricao insc = new Inscricao(al, disc, dados[2]);
+                            ins.add(insc); 
+                            al.addInscricao(insc);
+                        }
             }
         }
         return ins;
+    }
+    
+    private static void informarNotasDeAlunos(){
+        Scanner scan = new Scanner(System.in);
+        String[] numMatriculas = new String[alunos.size()];
+        for(int i = 0;i<alunos.size();i++)
+            numMatriculas[i] = alunos.get(i).getMat();
+        
+        String[] numDisciplinas = new String[disciplinas.size()];
+        for(int i = 0;i<disciplinas.size();i++)
+            numDisciplinas[i] = disciplinas.get(i).getCod();
+        
+        for(String a : numMatriculas){
+            for(int i =0;i<alunos.size();i++){
+                if(alunos.get(i).getMat().equals(a))
+                    for(String b : numDisciplinas){
+                        if(alunos.get(i).verificaInscricao(b)){
+                            String[] Nota;
+                            System.out.println("Informe as notas para o Aluno: "+ alunos.get(i).getNome()+" Na disciplina "+ alunos.get(i).achaInscricao(b).getDisciplina().getNome());
+                            Nota = scan.nextLine().split(" ");
+                            float[] Notas = new float[Nota.length];
+                            for(int j = 0;j<Nota.length;j++)
+                                Notas[j] = Float.parseFloat(Nota[j]);
+                            alunos.get(i).achaInscricao(b).setNotas(Notas);
+                        }
+                    }
+            }
+                    
+                    
+                
+        }
+        
     }
 }

@@ -29,4 +29,13 @@ public class Inscricao {
     private void setData_cancelamento(String data){
         this.data_cancelamento = data;
     }
+    
+    public void setNotas(float[] b){
+        this.notas = b;
+    }
+    
+    public Disciplina getDisciplina(){
+        return this.disciplina;
+    }
+    
 }
