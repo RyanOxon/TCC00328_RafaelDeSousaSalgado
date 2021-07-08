@@ -37,5 +37,13 @@ public class Inscricao {
     public Disciplina getDisciplina(){
         return this.disciplina;
     }
+
+    public float[] getNotas() {
+        return this.notas;
+    }
+
+    public Aluno getAluno() {
+        return this.aluno;
+    }
     
 }

@@ -34,8 +34,15 @@ public class SistemaAcademico {
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao carregar as Inscricoes, Arquivo nao encontrado");
         }
+        System.out.println(" ");
+        System.out.println(" ");
         
         informarNotasDeAlunos();
+        
+        System.out.println(" ");
+        System.out.println(" ");
+        
+        calcularMedias();
     }
     
     private static ArrayList<Aluno> carregarAlunos(String nomeArquivo) throws FileNotFoundException{
@@ -137,5 +144,15 @@ public class SistemaAcademico {
                 
         }
         
+    }
+
+    private static void calcularMedias() {
+        for(Inscricao ins : inscricoes){
+            float media = 0;
+            for(int i = 0;i<ins.getNotas().length;i++)
+                media += ins.getNotas()[i]/ins.getNotas().length;
+            
+            System.out.printf("Aluno %s Possui Média %.2f Na Disciplina %s \n" , ins.getAluno().getNome(), media , ins.getDisciplina().getNome());
+        }
     }
 }
