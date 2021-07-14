@@ -1,6 +1,5 @@
 package uff.ic.lleme.tcc00328.s20211.exercicio.tutorialOOcont.RafaelDeSousaSalgado;
 
-import uff.ic.lleme.tcc00328.s20211.exercicio.tutorialOO.RafaelDeSousaSalgado.*;
 import java.util.ArrayList;
 
 public class Aluno extends Pessoa {
@@ -32,7 +31,7 @@ public class Aluno extends Pessoa {
     
     public boolean verificaInscricao(String a){
         for(Inscricao i: inscricoes){
-            if(i.getDisciplina().getCod().equals(a))
+            if(i.getTurma().getDisciplina().getCod().equals(a))
                 return true;
         }
         return false;
@@ -44,7 +43,7 @@ public class Aluno extends Pessoa {
 
     public Inscricao achaInscricao(String b) {
         for(Inscricao i: inscricoes)
-            if(i.getDisciplina().getCod().equals(b))
+            if(i.getTurma().getDisciplina().getCod().equals(b))
                 return i;
         
         return null;

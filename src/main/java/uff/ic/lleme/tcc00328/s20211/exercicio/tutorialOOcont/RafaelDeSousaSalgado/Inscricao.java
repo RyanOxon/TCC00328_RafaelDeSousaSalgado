@@ -6,12 +6,12 @@ public class Inscricao {
     private Aluno aluno;
     private String data_matricula;
     private String data_cancelamento;
-    private Disciplina disciplina;
+    private Turma turma;
     private float[] notas;
     
-    Inscricao(Aluno aluno, Disciplina disciplina, String data){
+    Inscricao(Aluno aluno, Turma turma, String data){
         setAluno(aluno);
-        setDisciplina(disciplina);
+        setTurma(turma);
         setData_matricula(data);
         
     }
@@ -20,8 +20,8 @@ public class Inscricao {
         this.aluno = aluno;
     }
 
-    private void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
+    private void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     private void setData_matricula(String data) {
@@ -36,8 +36,8 @@ public class Inscricao {
         this.notas = b;
     }
     
-    public Disciplina getDisciplina(){
-        return this.disciplina;
+    public Turma getTurma(){
+        return this.turma;
     }
 
     public float[] getNotas() {
