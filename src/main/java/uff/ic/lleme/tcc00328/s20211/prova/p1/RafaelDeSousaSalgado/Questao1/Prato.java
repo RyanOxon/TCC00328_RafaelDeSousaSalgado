@@ -1,8 +1,8 @@
 package uff.ic.lleme.tcc00328.s20211.prova.p1.RafaelDeSousaSalgado.Questao1;
 
 public class Prato {
-    String nome;
-    float preco;
+    private String nome;
+    private float preco;
 
     Prato(String nome, float valor) {
         setNome(nome);
