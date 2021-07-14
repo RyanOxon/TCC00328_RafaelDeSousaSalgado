@@ -113,9 +113,10 @@ public class Gestao {
             for(int i = 0; i<pratos.length;i++){
                 if(pd !=null && pratos[i]!= null){
                     for(Item it : pd.itens){
-                        if(pratos[i].getNome().equals(it.getPrato().getNome())){
-                            qntPratos[i] += it.getQnt();
-                            total += it.getQnt();
+                        if(it !=null)
+                            if(pratos[i].getNome().equals(it.getPrato().getNome())){
+                                qntPratos[i] += it.getQnt();
+                                total += it.getQnt();
                         }
                             
                     }
@@ -124,9 +125,10 @@ public class Gestao {
             }
         }
         for( int i = 0; i<pratos.length;i++){
-            System.out.printf("Prato: %s > " , pratos[i].getNome());
-            System.out.printf("%.0f %% \n", (qntPratos[i]/total)*100);
-            
+            if(pratos[i] != null){
+                System.out.printf("Prato: %s > " , pratos[i].getNome());
+                System.out.printf("%.0f %% \n", ((float)qntPratos[i]/total)*100);
+            }
         }
     }
 }
