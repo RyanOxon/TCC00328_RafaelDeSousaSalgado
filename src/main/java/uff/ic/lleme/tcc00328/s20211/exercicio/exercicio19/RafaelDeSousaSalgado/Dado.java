@@ -7,11 +7,16 @@ package uff.ic.lleme.tcc00328.s20211.exercicio.exercicio19.RafaelDeSousaSalgado;
 
 public class Dado {
     private int lados;
+    private int valor;
     
     Dado(int lados){
         setLados(lados);
     }
-
+    
+    public void sortear(){
+        setValor((int)Math.floor(Math.random()*(getLados())+1));
+    }
+    
     private void setLados(int lados) {
         this.lados = lados;
     }
@@ -19,4 +24,14 @@ public class Dado {
     public int getLados(){
         return lados;
     }
+    
+    private void setValor(int valor){
+        this.valor = valor;
+    }
+    
+    public int getValor(){
+        return valor;
+    }
+    
+
 }

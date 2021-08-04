@@ -2,49 +2,78 @@
 package uff.ic.lleme.tcc00328.s20211.exercicio.exercicio19.RafaelDeSousaSalgado;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Mesa {
-    private ArrayList<Pessoa> pessoas = new ArrayList<>();
-
+    private ArrayList<Pessoa> participantes = new ArrayList<>();
+    private ArrayList<Dado> dados = new ArrayList<>();
+    private Pessoa vencedor = null;
     int rodada = 0;
     
-    public int fazerRolagem(Dado dado1, Dado dado2){
-        int roll_1 = (int)Math.floor(Math.random()*(dado1.getLados())+1);
-        int roll_2 = (int)Math.floor((Math.random()*(dado2.getLados())+1));
-        System.out.println("Foram rolados os numeros " +roll_1 + " e " + roll_2);
-        return roll_1 + roll_2;
+    public void Rodada(){
+        Collections.shuffle(participantes);
+        for (int i = 0; i < participantes.size(); i++) {
+            if(emProgresso()){
+                System.out.println("\n\nVez de "+ participantes.get(i).getNome() + " rolar: ");
+                participantes.get(i).fazerRolagem();
+                checaRolagem(participantes.get(i));
+            }            
+        }
+        rodada++;
     }
-
-    public void startGame() {
-        nextRound();
-        pessoas.forEach(p ->p.setStatus("Jogando"));
-    }
-
-    public boolean inGame() {
-        if (pessoas.stream().anyMatch(p -> (p.getStatus().equals("Jogando"))))
-            return true;
+ 
+    private void checaRolagem(Pessoa pessoa){
+        int resultado = pessoa.calculaValor();
+        if(rodada == 0){
+            if(resultado == 7 || resultado == 11)
+                vencedor = pessoa;
+            else if(resultado == 2 || resultado == 3|| resultado == 12){
+                participantes.remove(pessoa);
+                System.out.println("Ops, tirou "+resultado+", " + pessoa.getNome()+" Perdeu");
+            }
+            else{
+                pessoa.setPonto(resultado);
+                System.out.println("O ponto de "+ pessoa.getNome() + " é "+ resultado);
+            }
+        }else {
+            if(resultado == pessoa.getPonto())
+                vencedor = pessoa;
+            else if(resultado == 7){
+                participantes.remove(pessoa);
+                System.out.println("Ops, tirou "+resultado+", " + pessoa.getNome()+" Perdeu");
+            }
+        }
         
-        return false;            
     }
     
-    public void nextRound(){
-        this.rodada++;
+    public Pessoa getVencedor(){
+        return vencedor;
     }
     
-    public void endGame(){
-        this.rodada = 0;
-        pessoas.forEach(p -> p.setStatus("Aguardando"));
+    public boolean emProgresso(){
+        if(participantes.isEmpty())
+            return false;
+        else if(vencedor == null)
+            return true;
+        return false;
+        
+    }
+    public ArrayList<Dado> getDados(){
+        return dados;
+    }
+    
+    public void addDado(Dado dado){
+        dados.add(dado);
     }
     
     public ArrayList<Pessoa> getPessoas() {
-        return pessoas;
+        return participantes;
     }
     
     public void addJogadores(Pessoa pessoa){
-        pessoas.add(pessoa);
+        participantes.add(pessoa);
+        pessoa.setMesa(this);
     }
 
-    public int getRound() {
-        return this.rodada;
-    }
+
 }
