@@ -23,8 +23,10 @@ public abstract class Apartamento {
     
     public void setOcupante(Pessoa p){
         for (int i = 0; i < vagas.length; i++) {
-            if(vagas[i]== null)
+            if(vagas[i]== null){
                 vagas[i] = p;
+                return;
+            }
         }
     }
     

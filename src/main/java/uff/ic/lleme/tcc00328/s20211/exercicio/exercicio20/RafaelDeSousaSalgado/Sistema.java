@@ -13,14 +13,7 @@ public class Sistema {
     public void fazerReserva(Pessoa p){
         reservas.add(new Reserva(p));
         p.setReserva(reservas.size());
-        
-        
-        periodo
-                quantidade de quartos de cada tipo disponivel
-                        nome
-                                indentidade
-                                telefone
-    }
+    }   
     
     
 }

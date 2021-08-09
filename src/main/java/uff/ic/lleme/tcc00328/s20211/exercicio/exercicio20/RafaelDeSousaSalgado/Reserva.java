@@ -4,6 +4,7 @@ public class Reserva {
     private int num;
     private Pessoa responsavel;
 
+        
     
     Reserva(Pessoa pessoa){
         responsavel = pessoa;
