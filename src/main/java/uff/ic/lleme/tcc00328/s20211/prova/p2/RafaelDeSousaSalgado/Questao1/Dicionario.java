@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Dicionario {
     
     public ArrayList<Palavra> palavras = new ArrayList<>();
-    protected ArrayList<Sinonimos> sin = new ArrayList<>();
+    private ArrayList<Sinonimos> sin = new ArrayList<>();
     
     public void addPalavra(Palavra palavra){
         palavras.add(palavra);
-        palavras.get(palavras.size()).vincDicio(this);
+        palavras.get(palavras.size()-1).vincDicio(this);
         
 
     }
@@ -29,5 +29,16 @@ public class Dicionario {
     public void addSignif(Sinonimos sinonimos) {
         sin.add(sinonimos);
     }
-    
-}
+
+    public Palavra ultimaPalavra() {
+        return palavras.get(palavras.size()-1);
+    }
+
+    public ArrayList<Palavra> PesquisarSignif(String signif) {
+        for( Sinonimos s : sin)
+            if(s.significado.equals(signif))
+                return s.palavras;
+        return null;        
+        }
+}    
+
